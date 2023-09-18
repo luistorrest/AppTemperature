@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.luistorrest.mispeliculas.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
@@ -23,27 +24,26 @@ class RegisterActivity : AppCompatActivity() {
 
         registerViewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
 
+        //Muestra los grados kelvin
         val  kelvinObserver = Observer<Double>{kelvin ->
             registerBinding.infoTextView.setText(kelvin.toString())
         }
 
         registerViewModel.kelvin.observe(this,kelvinObserver)
 
+        //Muerstra el mensaje de error
+        val errorMsgObserver =Observer<String>{errorMsg ->
+            Snackbar.make(view,errorMsg,Snackbar.LENGTH_INDEFINITE)
+                .setAction("Aceptar"){}
+                .show()
+
+        }
+
+        registerViewModel.errorMsg.observe(this,errorMsgObserver)
+
         registerBinding.buttonConvert.setOnClickListener {
 
-            registerViewModel.convertirGrados(registerBinding.CelsiusEditText.text.toString(),)
-
-            /*if(registerBinding.CelsiusEditText.text.toString().isEmpty()) {
-                Toast.makeText(this,"Ingrese una temperatura",Toast.LENGTH_LONG).show()
-            }
-
-            else {
-                val celsius = registerBinding.CelsiusEditText.text.toString()
-                var kelvin = celsius.toFloat() + 273.15
-                registerBinding.infoTextView.setText(kelvin.toString() + " K")
-                Toast.makeText(this,"Se ha convertido los grados a kelvin",Toast.LENGTH_LONG).show()
-            }*/
-
+        registerViewModel.convertirGrados(registerBinding.CelsiusEditText.text.toString(),)
         }
     }
 }
