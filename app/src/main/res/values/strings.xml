@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MisPeliculas</string>
+    <string name="Celsius">Grados Celsius</string>
+    <string name="Kelvin">Grados Kelvin </string>
+    <string name="Convertir">Convertir</string>
+    <string name="Convertidos"> Grados convertidos</string>
+    <string name="tittle">Convertidor de grados Celsius a Kelvin</string>
+
+</resources>
