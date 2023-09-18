@@ -1,17 +1,21 @@
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 
 class RegisterViewModel : ViewModel() {
+
+    val kelvin: MutableLiveData<Double> by lazy {
+        MutableLiveData<Double>()
+    }
     fun convertirGrados(celsius: String) {
 
         if (celsius.isEmpty()) {
             Log.d("Error","Empty")
         }else{
-            var kelvin = celsius.toDouble() + 273.15
-            Log.d("Kelvin",kelvin.toString())
-            //Toast.makeText(this,"Se ha convertido los grados a kelvin",Toast.LENGTH_LONG).show()
+             kelvin.value = celsius.toDouble() + 273.15
+
         }
     }
 }

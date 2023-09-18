@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.luistorrest.mispeliculas.databinding.ActivityRegisterBinding
 
@@ -21,6 +22,12 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(view)
 
         registerViewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
+
+        val  kelvinObserver = Observer<Double>{kelvin ->
+            registerBinding.infoTextView.setText(kelvin.toString())
+        }
+
+        registerViewModel.kelvin.observe(this,kelvinObserver)
 
         registerBinding.buttonConvert.setOnClickListener {
 
